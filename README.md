@@ -1,14 +1,15 @@
-# Berkeley Haas - Professional Certificate in Machine Learning and Artificial Intelligence - Cap
+# Berkeley Haas - Professional Certificate in AIML - Practical Application 2 - What drives the price of a car?
 
 ## Background
-This project aims to train a classification model to predict if a user will accept a coupon given his/her answers to some survey questions.
-
-The data used in here comes from a survey on Amazon Mechanical Turk. 
-[In-Vehicle Coupon Recommendation](https://archive.ics.uci.edu/dataset/603/in+vehicle+coupon+recommendation)
+This project amins to understand the factors that make a car more or less expensive.  This analysis done provides  recommendations to a used car dealership -- as to what consumers value in a used car. The dataset came from Kaggle and contains information of 426K used car sales data. 
 
 In this project the work I have done is split into 3 parts.
 
 ### Part 1 - Preprocessing of the data
+The raw data has vehicle sales information of 426K vehicles with 18 data points  for each vehicle sold:
+The raw data set had the following features for the vehicles sold:
+'year','manufacturer','model','condition','cylinders', 'fuel', 'odometer', 'title_status', 'transmission','VIN','drive','size','type','paint_color
+
 During this data processing, I have worked to:
 
 * Handle Missing Values
@@ -19,11 +20,17 @@ During this data processing, I have worked to:
 * Handle Class Imbalance
 * Feature Selection & Feature Extraction
 
+#### Outlier Removal
+To prevent skewness and ensure robust analysis, I removed the bottom 5% and top 5% of values in the price feature, effectively eliminating outliers.
+
+After cleansing the data using the steps above, the cleaner dataset now has:
+369516 vehicles sales data. 
+
 ### Part 2 Modeling training
 
-Here in Part 2, I have transformed the features  we tested our data train to machine learning model and evaluated it. 
+Here in Part 2, I have transformed the features  we tested our data to train to machine learning model and evaluated it. 
 
-#### Data Tranformation and Encoding
+### Part 3 -  Data Tranformation and Encoding
 Here I am performing data preprocessing for machine learning pipeline using ColumnTransformer from sklearn. 
 
 Standardized numerical features by scaling them to have zero mean and unit variance using StandardScaler().
@@ -32,7 +39,7 @@ Encoded categorical variables using OneHotEncoding, converting each category int
 
 Fit the transformations to X_train (learns scaling parameters for numerical data and identifies unique categories for OneHotEncoding).
 
-Used the same transformations learned from X_train and applies them to X_test (without refitting).
+Used the same transformations learned from X_train and applied them to X_test (without refitting).
 
 All numerical features are standardized.
 All categorical features are one-hot encoded.
@@ -41,124 +48,146 @@ With this the data is now ready for machine learning models that require numeric
 Applying StandardScaler and OneHotEncoding created a combination of Input features to form a complex set of categorical features. 
 
 ### Numerical Features
-    ['temperature', 'age', 'education', 'income', 'Bar', 'CoffeeHouse',
-       'CarryAway', 'RestaurantLessThan20', 'Restaurant20To50', 'distance']
+['year', 'odometer']
 
 ### Categorical Features
 
-    'destination_Home' 'destination_No Urgent Place' 'destination_Work'
-    'passanger_Alone' 'passanger_Friend(s)' 'passanger_Kid(s)'
-    'passanger_Partner' 'weather_Rainy' 'weather_Snowy' 'weather_Sunny'
-    'time_10AM' 'time_10PM' 'time_2PM' 'time_6PM' 'time_7AM' 'coupon_Bar'
-    'coupon_Carry out & Take away' 'coupon_Coffee House'
-    'coupon_Restaurant(20-50)' 'coupon_Restaurant(<20)' 'expiration_1d'
-    'expiration_2h' 'gender_Female' 'gender_Male' 'maritalStatus_Divorced'
-    'maritalStatus_Married partner' 'maritalStatus_Single'
-    'maritalStatus_Unmarried partner' 'maritalStatus_Widowed'
-    'has_children_0' 'has_children_1' 'occupation_Architecture & Engineering'
-    'occupation_Arts Design Entertainment Sports & Media'
-    'occupation_Building & Grounds Cleaning & Maintenance'
-    'occupation_Business & Financial'
-    'occupation_Community & Social Services'
-    'occupation_Computer & Mathematical'
-    'occupation_Construction & Extraction'
-    'occupation_Education&Training&Library'
-    'occupation_Farming Fishing & Forestry'
-    'occupation_Food Preparation & Serving Related'
-    'occupation_Healthcare Practitioners & Technical'
-    'occupation_Healthcare Support'
-    'occupation_Installation Maintenance & Repair' 'occupation_Legal'
-    'occupation_Life Physical Social Science' 'occupation_Management'
-    'occupation_Office & Administrative Support'
-    'occupation_Personal Care & Service' 'occupation_Production Occupations'
-    'occupation_Protective Service' 'occupation_Retired'
-    'occupation_Sales & Related' 'occupation_Student'
-    'occupation_Transportation & Material Moving' 'occupation_Unemployed'
-    'direction_same_0' 'direction_same_1']
+['manufacturer_acura' 'manufacturer_alfa-romeo'
+ 'manufacturer_aston-martin' 'manufacturer_audi' 'manufacturer_bmw'
+ 'manufacturer_buick' 'manufacturer_cadillac' 'manufacturer_chevrolet'
+ 'manufacturer_chrysler' 'manufacturer_datsun' 'manufacturer_dodge'
+ 'manufacturer_ferrari' 'manufacturer_fiat' 'manufacturer_ford'
+ 'manufacturer_gmc' 'manufacturer_harley-davidson' 'manufacturer_honda'
+ 'manufacturer_hyundai' 'manufacturer_infiniti' 'manufacturer_jaguar'
+ 'manufacturer_jeep' 'manufacturer_kia' 'manufacturer_land rover'
+ 'manufacturer_lexus' 'manufacturer_lincoln' 'manufacturer_mazda'
+ 'manufacturer_mercedes-benz' 'manufacturer_mercury' 'manufacturer_mini'
+ 'manufacturer_mitsubishi' 'manufacturer_morgan' 'manufacturer_nissan'
+ 'manufacturer_pontiac' 'manufacturer_porsche' 'manufacturer_ram'
+ 'manufacturer_rover' 'manufacturer_saturn' 'manufacturer_subaru'
+ 'manufacturer_tesla' 'manufacturer_toyota' 'manufacturer_unknown'
+ 'manufacturer_volkswagen' 'manufacturer_volvo' 'condition_excellent'
+ 'condition_fair' 'condition_good' 'condition_like new' 'condition_new'
+ 'condition_salvage' 'condition_unknown' 'cylinders_10 cylinders'
+ 'cylinders_12 cylinders' 'cylinders_3 cylinders' 'cylinders_4 cylinders'
+ 'cylinders_5 cylinders' 'cylinders_6 cylinders' 'cylinders_8 cylinders'
+ 'cylinders_other' 'fuel_diesel' 'fuel_electric' 'fuel_gas' 'fuel_hybrid'
+ 'fuel_other' 'title_status_clean' 'title_status_lien'
+ 'title_status_missing' 'title_status_parts only' 'title_status_rebuilt'
+ 'title_status_salvage' 'transmission_automatic' 'transmission_manual'
+ 'transmission_other' 'drive_4wd' 'drive_fwd' 'drive_rwd' 'drive_unknown'
+ 'type_SUV' 'type_bus' 'type_convertible' 'type_coupe' 'type_hatchback'
+ 'type_mini-van' 'type_offroad' 'type_other' 'type_pickup' 'type_sedan'
+ 'type_truck' 'type_unknown' 'type_van' 'type_wagon' 'paint_color_black'
+ 'paint_color_blue' 'paint_color_brown' 'paint_color_custom'
+ 'paint_color_green' 'paint_color_grey' 'paint_color_orange'
+ 'paint_color_purple' 'paint_color_red' 'paint_color_silver'
+ 'paint_color_unknown' 'paint_color_white' 'paint_color_yellow' 'state_ak'
+ 'state_al' 'state_ar' 'state_az' 'state_ca' 'state_co' 'state_ct'
+ 'state_dc' 'state_de' 'state_fl' 'state_ga' 'state_hi' 'state_ia'
+ 'state_id' 'state_il' 'state_in' 'state_ks' 'state_ky' 'state_la'
+ 'state_ma' 'state_md' 'state_me' 'state_mi' 'state_mn' 'state_mo'
+ 'state_ms' 'state_mt' 'state_nc' 'state_nd' 'state_ne' 'state_nh'
+ 'state_nj' 'state_nm' 'state_nv' 'state_ny' 'state_oh' 'state_ok'
+ 'state_or' 'state_pa' 'state_ri' 'state_sc' 'state_sd' 'state_tn'
+ 'state_tx' 'state_ut' 'state_va' 'state_vt' 'state_wa' 'state_wi'
+ 'state_wv' 'state_wy']
 
-The total number of features after applying Scaling and OneHotEncodiing stands as 68. 
+The total number of features after applying Scaling and OneHotEncodiing stands as 156. 
 
 #### Creation and running performance of different models
 
- I created and tested the model performance for the following models:
+ I created and tested the model performance for Ridge Regression.
  
- * Logistic Regression
- * Lasso Regression
- * Decision Trees
- * Gaussian Naive Bayes
- * Bernoulli Naive Bayes
- * K-nearest Neighbor
- * Linear SVM - Support Vector Machines
 
-### Part 3 Applying PCA - Principal Component Analysis to reduce components / input features
+### Part 3 Summary and Evaluation of Model performance
 
-Finally I explored PCA - Principal Component Analysis, to reduce the dimensions or in other words the number of features. 
+I used Ridge Regression, primarily because of its faster execution time, given very large dataset
 
-Applying PCA reduced the features from 68 to 30 most influential ones listed below:
-    PC1 is most influenced by: RestaurantLessThan20
-    PC2 is most influenced by: age
-    PC3 is most influenced by: temperature
-    PC4 is most influenced by: income
-    PC5 is most influenced by: distance
-    PC6 is most influenced by: CoffeeHouse
-    PC7 is most influenced by: Restaurant20To50
-    PC8 is most influenced by: Restaurant20To50
-    PC9 is most influenced by: Bar
-    PC10 is most influenced by: education
-    PC11 is most influenced by: expiration_2h
-    PC12 is most influenced by: RestaurantLessThan20
-    PC13 is most influenced by: RestaurantLessThan20
-    PC14 is most influenced by: destination_Home
-    PC15 is most influenced by: has_children_0
-    PC16 is most influenced by: coupon_Coffee House
-    PC17 is most influenced by: maritalStatus_Single
-    PC18 is most influenced by: coupon_Restaurant(<20)
-    PC19 is most influenced by: time_10AM
-    PC20 is most influenced by: maritalStatus_Married partner
-    PC21 is most influenced by: time_10PM
-    PC22 is most influenced by: coupon_Carry out & Take away
-    PC23 is most influenced by: coupon_Bar
-    PC24 is most influenced by: weather_Sunny
-    PC25 is most influenced by: occupation_Unemployed
-    PC26 is most influenced by: time_2PM
-    PC27 is most influenced by: coupon_Restaurant(20-50)
-    PC28 is most influenced by: occupation_Computer & Mathematical
-    PC29 is most influenced by: passanger_Partner
-    PC30 is most influenced by: occupation_Sales & Related
+Ridge Regression is a linear regression model that uses L2 regularization to reduce overfitting by minimizing the magnitude of model coefficients.
 
-Re-trained the basic models after applying PCA, to explore any improvement in performance. 
+The objective of this evaluation was twofold:
 
-### Part 4 Summary and Evaluation of Model performance
+Achieve a balance between Mean Squared Error (MSE), ensuring accurate predictions while minimizing overfitting.
+Identify the coefficients of each feature, enabling the analysis of their impact on car prices.
+By comparing the performance of these models, we can determine which one provides the most insightful and accurate predictions, ultimately informing data-driven decisions.
 
-The following tables summarize the results of Validation Accuracy,  Testing Accuracy  and AUC - Area Under the Curve of Models (with Data before and after PCA) 
+Model performance was assessed using:
+Mean Squared Error (MSE): measures prediction accuracy
+Score: Evaluates the model's ability to make accurate predictions.
+Time/Performance: Measures the computational efficiency and speed of the model.
 
-From the tables it clear that KNN Classifier performs better than the rest of the models.(in both Categories - i.e, with PCA and without PCA)
+The result of the evaluation can be found in the following table:
 
-The performance of the models was slightly better without PCA. 
-One thing to note though, the models took comparatively lesser time to train with PCA.  
+|Model | Best Score	| Training Mean Squared Error (MSE) | Testing Mean Squared Error (MSE) | Elapsed Time   |
+|------|------------|--------------------------|--------|--------|
+|Ridge |Score: 0.46720	| 69895156.25	   | 69704668.40        |30 seconds      |
 
-| Models with out PCA | Validation Accuracy|Testing Accuracy|AUC|
-|-------|---------|-------|-----------|
-|Logistic Regression with No Penalty|0.683|0.673|0.73|
-|Lasso Logistic Regression|0.685|0.674|0.73|
-|Ridge Logistic Regression|0.685|0.674|0.73|
-|Decision Tree|0.684|0.686|0.73|
-|Bernoulli Naive Bayes|0.657|0.655|0.70|
-|**KNN Classifier**|**0.722**|**0.732**|**0.79**|
-|Linear SVM|0.685|0.672|0.73|
 
-| Models with PCA | Validation Accuracy|Testing Accuracy|AUC|
-|-------|---------|-------|-----------|
-|Logistic Regression with No Penalty|0.679|0.671|0.72|
-|Lasso Logistic Regression|0.679|0.672|0.72|
-|Ridge Logistic Regression|0.679|0.671|0.72|
-|Decision Tree|0.650|0.648|0.68|
-|Bernoulli Naive Bayes|0.657|0.655|0.68|
-|**KNN Classifier**|**0.722**|**0.720**|**0.78**|
-|Linear SVM|0.679|0.672|0.72|
+The following table summarizes the Positive and Negative influence of features on price of a Vehicle
+
+NOTE: negative value reduces price, postive value increases price
+
+#### Feature Coefficients
+
+| Feature                          | Coefficient      |
+|----------------------------------|------------------|
+| Tesla                            | 10358.76        |
+| Datsun                           | 9398.11         |
+| Porsche                          | 6442.74         |
+| Transmission (Other)             | 5340.24         |
+| Alfa-Romeo                       | 5176.76         |
+| Cylinders (12 Cylinders)         | 5101.62         |
+| Cylinders (5 Cylinders)          | -4062.89        |
+| Mercury                          | -4168.76        |
+| Mitsubishi                       | -4259.24        |
+| Harley-Davidson                  | -4796.26        |
+| Condition (Fair)                 | -5173.44        |
+| Fiat                             | -5862.20        |
+| Saturn                           | -5987.10        |
+ 
+### Evaluation
+#### Telsa, Datsun, Porsche and Alfa-romeo manufacturer brands command higher selling prices
+#### Saturn, Fiat, Harley Davidson, Mitsubishi and Mecury manfacturer brands 
+#### Vehicles with 12 Cylinders seem to command higher selling price.
+
+<h2>Coefficients Insights</h2>
+<p>Coefficients represent the change in the predicted outcome for a one-unit change in the feature, while holding all other features constant. They indicate:</p>
+<p>
+    <strong>Coefficients:</strong> How much do individual features impact the prediction?
+</p>
+<div style="text-align:center;">
+    <img src="data/coefficients.png" />
+</div>
+
+<ul>
+    <li><strong>Luxury brands</strong>: Positive coefficients for brands like Tesla, Porsche and Alfa-romeo command higher prices than other luxery cars.</li>
+    <li><strong>Datsun</strong>: High positive coefficient suggest elevated demand and prices, presenting lucrative opportunities.</li>
+    <li><strong>Saturn</strong>: Negative coefficient indicate weaker demand and lesser price impacting revenue stream.</li>
+</ul>
+
+
+<h3>Common Benefits</h3>
+
+<ul>
+    <li>Data-driven pricing: Utilise coefficients to inform pricing strategies.</li>
+    <li>Inventory optimisation: Stock vehicles with in-demand features.</li>
+    <li>Targeted marketing: Focus on specific customer segments.</li>
+</ul>
+
+
+<p>Car dealerships can refine their business strategies, enhance customer satisfaction, and boost profitability by  leveraging these insights</p>
+
+<h2>Conclusion</h2>
+<p>
+    This analysis offers crucial insights that help used car dealers enhance their pricing strategies and manage inventory more effectively. By identifying how key features influence car prices, dealers can make data-driven decisions to improve their business operations.
+</p>
+</div>
+</div>
+
 
 ## Link to Notebook:
-[Explore Coupon Acceptance Factors by Customers](https://github.com/nbajam/BH-PCAIML-project/blob/main/bh_pcaiml_project_final.ipynb)
+[Explore Coupon Acceptance Factors by Customers](https://github.com/nbajam/BH-PCAIML-MOD5-PAA1/blob/main/bh_pcaiml_mod11_prac_assign.ipynb)
 
 ## Data Used:
 [In-Vehicle Coupon Recommendation](https://archive.ics.uci.edu/dataset/603/in+vehicle+coupon+recommendation)
