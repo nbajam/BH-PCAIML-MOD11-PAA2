@@ -187,7 +187,7 @@ NOTE: negative value reduces price, postive value increases price
 
 
 ## Link to Notebook:
-[Explore Coupon Acceptance Factors by Customers](https://github.com/nbajam/BH-PCAIML-MOD5-PAA1/blob/main/bh_pcaiml_mod11_prac_assign.ipynb)
+[Explore Coupon Acceptance Factors by Customers](https://github.com/nbajam/BH-PCAIML-MOD11-PAA2/blob/main/bh_pcaiml_mod11_prac_assign.ipynb)
 
 ## Data Used:
 [In-Vehicle Coupon Recommendation](https://archive.ics.uci.edu/dataset/603/in+vehicle+coupon+recommendation)
